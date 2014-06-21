@@ -1,6 +1,6 @@
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
-from dumpsteroverflow.do_core import Address, Discoverer
+from dumpsteroverflow.do_core.models import Address, Discoverer
 import paypalrestsdk as pp
 
 
