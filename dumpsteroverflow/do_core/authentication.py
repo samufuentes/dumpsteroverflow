@@ -23,7 +23,7 @@ class PaypalBackend(ModelBackend):
         if discoverer_created:
             address = userinfo['address']
             discoverer.default_address = Address.objects.get_or_create(
-                street=address['street_address'],
+                street_address=address['street_address'],
                 zip_code=address['postal_code'],
                 city=address['locality'])
             discoverer.save()
