@@ -23,7 +23,7 @@ class Address(GenericFieldsMixin):
 class Discoverer(GenericFieldsMixin):
     user = models.OneToOneField(User)
     points = models.IntegerField(default=0)
-    default_address = models.OneToOneField(Address)
+    default_address = models.OneToOneField(Address, null=True)
 
 
 class Dumpster(GenericFieldsMixin):
