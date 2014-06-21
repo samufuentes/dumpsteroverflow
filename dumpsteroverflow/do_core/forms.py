@@ -1,5 +1,5 @@
 from django import forms
-from dumpsteroverflow.do_core.models import Dumpster
+from models import Dumpster
 
 class OverflowForm(forms.Form):
     is_brown = forms.BooleanField(required=False)
