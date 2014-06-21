@@ -15,7 +15,7 @@ class HomeView(TemplateView):
             user = authenticate(token=token)
             if user is not None:
                 login(request, user)
-        super(HomeView, self).get(request)
+        return super(HomeView, self).get(request)
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
