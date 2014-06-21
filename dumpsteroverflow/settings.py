@@ -62,12 +62,24 @@ TEMPLATE_DIRS = [os.path.join(HOME_DIR, 'templates')]
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
+try:
+    elephant_uri = urlparse(os.environ['ELEPHANTSQL_URL'])
+    db_config = {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': elephant_uri.path[1:],
+        'HOST': elephant_uri.hostname,
+        'PORT': elephant_uri.port,
+        'USER': elephant_uri.username,
+        'PASSWORD': elephant_uri.password
+    }
+except KeyError:
+    db_config = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+
+DATABASES = {
+    'default': db_config
 }
 
 # Internationalization
