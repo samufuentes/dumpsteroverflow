@@ -1,1 +1,1 @@
-web: python dumpsteroverflow/manage.py runserver
+web: python dumpsteroverflow/manage.py runserver $PORT
