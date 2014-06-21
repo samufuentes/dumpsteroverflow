@@ -27,6 +27,10 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'dumpsteroverflow.do_core.authentication.PaypalBackend',
+)
 
 # Application definition
 

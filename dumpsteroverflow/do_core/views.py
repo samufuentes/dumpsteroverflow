@@ -2,10 +2,27 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.views.generic.base import TemplateView, View
 
 from forms import OverflowForm
 from models import Address, Dumpster
+from django.views.generic.base import TemplateView
+from django.contrib.auth import authenticate, login
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get(self, request):
+        token = request.GET.get('code')
+        if token:
+            user = authenticate(token=token)
+            if user is not None:
+                login(request, user)
+        super(HomeView, self).get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        # Change context here
+        return context
 
 def home(request):
     template_name = 'home.html'
