@@ -9,8 +9,6 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth import authenticate, login
 
 class HomeView(TemplateView):
-    template_name = 'home.html'
-
     def get(self, request):
         token = request.GET.get('code')
         if token:
