@@ -1,27 +1,34 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from forms import OverflowForm
 from models import Address, Dumpster
-from django.views.generic.base import TemplateView
+from django.views.generic.base import View
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+import paypalrestsdk as pp
 
-class HomeView(TemplateView):
-    def get(self, request):
-        token = request.GET.get('code')
-        if token:
-            user = authenticate(token=token)
-            if user is not None:
-                login(request, user)
-        return super(HomeView, self).get(request)
 
-    def get_context_data(self, **kwargs):
-        context = super(HomeView, self).get_context_data(**kwargs)
-        # Change context here
-        return context
+def login(request):
+    token = request.GET.get('code')
+    next = request.GET.get('next')
+    if token:
+        user = authenticate(token=token)
+        if user is not None:
+            login(request, user)
+        redirect_url = next
+    else:
+        redirect_url = pp.Tokeninfo.authorize_url(
+            "scope": "profile email address phone "
+            "https://uri.paypal.com/services/paypalattributes",
+            "state": str(next)})
+    return redirect(redirect_url)
 
+
+@login_required(login_url='/login/')
 def home(request):
     template_name = 'home.html'
     form = OverflowForm()
