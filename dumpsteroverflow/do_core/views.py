@@ -1,24 +1,28 @@
-from django.views.generic.edit import FormView
+from django.shortcuts import render
+
 from forms import OverflowForm
 from models import Address, Dumpster
 
-class HomeView(FormView):
+def home(request):
     template_name = 'home.html'
-    form_class = OverflowForm
-    success_url = '/'
+    form = OverflowForm()
+    context = {'form': form}
 
-    def form_valid(self, form):
-        address = Address.objects.get_or_create(street_address=form.cleaned_data['street_address'],
-            zip_code=form.cleaned_data['zip_code'], city=form.cleaned_data['city'])
-        if form.cleaned_data['is_brown']:
-            dumpster = Dumpster.objects.get_or_create(dumpster_type=Dumpster.DUMPSTER_TYPE[0], location=address)
-            if not dumpster.is_full:
-                dumpster.is_full = True
-                # TODO: Update points
-                # TODO: Send alert to garbage collectors
-        return super(HomeView, self).form_valid(form)
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(HomeView, self).get_context_data(**kwargs)
-    #     # Change context here
-    #     return context
+    if request.method == 'POST':
+        form = OverflowForm(request.POST)
+        if form.is_valid():
+            print "Form is valid!!"
+            # Reset form since we come back to initial view instead of redirect.
+            # TODO. Update context: points and point variation
+            # address = Address.objects.get_or_create(street_address=form.cleaned_data['street_address'],
+            #     zip_code=form.cleaned_data['zip_code'], city=form.cleaned_data['city'])
+            # if form.cleaned_data['is_brown']:
+            #     dumpster = Dumpster.objects.get_or_create(dumpster_type=Dumpster.DUMPSTER_TYPE[0], location=address)
+            #     if not dumpster.is_full:
+            #         dumpster.is_full = True
+            #         dumpster.save()
+            #         # TODO: Update points
+            #         # TODO: Send alert to garbage collectors
+            form = OverflowForm()
+    print form
+    return render(request, template_name, context)
