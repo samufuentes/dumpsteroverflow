@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+HOME_DIR = os.path.join(BASE_DIR, 'dumpsteroverflow')
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'do_core',
+    'dumpsteroverflow.do_core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'dumpsteroverflow.urls'
 
 WSGI_APPLICATION = 'dumpsteroverflow.wsgi.application'
+
+TEMPLATE_DIRS = [os.path.join(HOME_DIR, 'templates')]
 
 
 # Database
