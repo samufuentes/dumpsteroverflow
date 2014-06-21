@@ -14,10 +14,12 @@ class Discoverer(GenericFieldsMixin):
     points = models.IntegerField(default=0)
 
 class Address(GenericFieldsMixin):
-    street = models.CharField(max_length=100)
-    number = models.IntegerField()
+    street_address = models.CharField(max_length=200)
     zip_code = models.IntegerField()
     city = models.CharField(max_length=50)
+
+    class Meta:
+        unique_together = ('street_address', 'zip_code', 'city')
 
 class Dumpster(GenericFieldsMixin):
     DUMPSTER_TYPES = (
@@ -27,8 +29,12 @@ class Dumpster(GenericFieldsMixin):
             ('GRAY', 'WASTE'),
         )
 
-    dumpster_type = models.CharField(max_length=1, choices=DUMPSTER_TYPES)
+    dumpster_type = models.CharField(max_length=10, choices=DUMPSTER_TYPES)
     location = models.ForeignKey(Address)
+    is_full = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('dumpster_type', 'location')
 
 class Overflow(GenericFieldsMixin):
     user = models.ForeignKey(Discoverer)
