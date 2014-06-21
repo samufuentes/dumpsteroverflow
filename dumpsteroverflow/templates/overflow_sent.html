@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+  {% if flash_error %}
+    <div data-role="page" data-theme="a" data-dialog="true" data-close-btn="none">
+      <div data-role="header">
+        <h1>Ouch!</h1>
+      </div>
+
+      <div role="main" class="ui-content">
+        <p>{{ flash_error }}</p>
+        <p class="s-btn-centered"><a href="#" class="ui-btn ui-btn-inline">OK</a></p>
+      </div>
+    </div>
+  {% else %}
+    <div data-role="page" data-theme="a" data-dialog="true" data-close-btn="none">
+      <div data-role="header">
+        <h1>Thank you!</h1>
+      </div>
+
+      <div role="main" class="ui-content">
+        <p>You just won 25 karma pts!</p>
+        <p class="s-btn-centered"><a href="#" class="ui-btn ui-btn-inline">Great</a></p>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
