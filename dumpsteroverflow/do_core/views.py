@@ -21,7 +21,7 @@ def login(request):
             login(request, user)
         redirect_url = next
     else:
-        redirect_url = pp.Tokeninfo.authorize_url(
+        redirect_url = pp.Tokeninfo.authorize_url({
             "scope": "profile email address phone https://uri.paypal.com/services/paypalattributes",
             "state": str(next)})
     return redirect(redirect_url)
