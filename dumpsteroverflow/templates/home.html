@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 
 {% block body %}
-  <div>Hello world</div>
+<div data-role="page" data-theme="b">
+
+  <div data-role="header">
+    <h1>Page Title</h1>
+  </div>
+
+  <div role="main" class="ui-content">
+    <form method="post">{% csrf_token %}
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        {{form.non_field_errors}}
+        <legend>Which dumpsters are full?</legend>
+        <label for="id_is_brown">Brown</label>
+        {{form.is_brown}}
+        <label for="id_is_yellow">Yellow</label>
+        {{form.is_yellow}}
+        <label for="id_is_blue">Blue</label>
+        {{form.is_blue}}
+        <label for="id_is_gray">Gray</label>
+        {{form.is_gray}}
+      </fieldset>
+      <p><input type="submit" value="Send"></p>
+    </form>
+  </div>
+</div>
 {% endblock %}
