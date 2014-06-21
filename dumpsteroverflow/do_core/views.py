@@ -10,11 +10,17 @@ from django.views.generic.base import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import paypalrestsdk as pp
+import os
 
 
 def login(request):
     token = request.GET.get('code')
     next = request.GET.get('next')
+    pp.configure({
+        "mode": os.environ['PAYPAL_MODE'],
+        "client_id": os.environ['PAYPAL_CLIENT_ID'],
+        "client_secret": os.environ['PAYPAL_CLIENT_SECRET'],
+        "openid_redirect_uri": os.environ['PAYPAL_OPENID_REDIRECT_URI']})
     if token:
         user = authenticate(token=token)
         if user is not None:
@@ -23,7 +29,8 @@ def login(request):
     else:
         redirect_url = pp.Tokeninfo.authorize_url({
             "scope": "profile email address phone https://uri.paypal.com/services/paypalattributes",
-            "state": str(next)})
+            "state": str(next)},
+            ")
     return redirect(redirect_url)
 
 
