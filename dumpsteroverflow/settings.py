@@ -1,5 +1,5 @@
 """
-Django settings for dumspteroverflow project.
+Django settings for dumpsteroverflow project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't79fo*p_93$6&^p45eo3)4s!y2#(jw0rdg%ozeo-5z02@=$!!g'
+SECRET_KEY = '*^h%uz13-oj)(007zwer^fy3%b7_q5jyy1ntd@@!$du9d4dr6_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,9 +47,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'dumspteroverflow.urls'
+ROOT_URLCONF = 'dumpsteroverflow.urls'
 
-WSGI_APPLICATION = 'dumspteroverflow.wsgi.application'
+WSGI_APPLICATION = 'dumpsteroverflow.wsgi.application'
 
 
 # Database
