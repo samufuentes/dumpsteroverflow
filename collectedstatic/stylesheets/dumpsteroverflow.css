@@ -1,0 +1,44 @@
+.s-btn-centered {
+  text-align: center;
+}
+
+.headline {
+  color: #fff;
+  text-shadow: 0 1px 0 #000;
+  text-align: center;
+}
+
+.ui-header .ui-title.user_info {
+  text-align: right;
+  margin: 0 3%;
+}
+
+.ui-header .ui-title.user_info .trophy {
+  height: 17px;
+  padding: 0 10px 0 3px;
+}
+
+.ui-icon-skull:after {
+	background-image: url("themes/images/icons-png/skull.svg");
+}
+/* Fallback */
+.ui-nosvg .ui-icon-skull:after {
+	background-image: url("themes/images/icons-png/skull.png");
+}
+
+.geolocation .ui-btn {
+  margin-left: 20px;
+}
+
+.ui-grid-b .dumpster_type {
+  padding: 0 25px 0 5px;
+  width: 49%;
+}
+
+.ui-grid-b .dumpster_type.ui-block-a {
+  padding: 0 5px 0 25px;
+}
+
+.home_page {
+  background-image: url("/static/images/bkg-5.jpg");
+}
