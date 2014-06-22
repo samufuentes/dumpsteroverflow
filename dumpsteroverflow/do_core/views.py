@@ -67,4 +67,6 @@ def overflow(request, points):
     if points=='0':
         return render(request, 'overflow_sent.html', {'flash_error': 'This dumpster overflow was already reported.'})
     else:
+        request.user.discoverer.points += points
+        request.user.discoverer.save()
         return render(request, 'overflow_sent.html', {'points': points})
