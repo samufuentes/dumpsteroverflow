@@ -22,9 +22,10 @@ def login(request):
         "openid_redirect_uri": os.environ['PAYPAL_OPENID_REDIRECT_URI']})
     if token:
         user = authenticate(token=token)
+        print "Hola, ", user
         if user is not None:
             login(request, user)
-        redirect_url = '/'
+            redirect_url = '/'
     else:
         redirect_url = pp.Tokeninfo.authorize_url({
             "scope": "profile email address phone https://uri.paypal.com/services/paypalattributes",
