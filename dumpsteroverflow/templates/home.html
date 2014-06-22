@@ -4,40 +4,51 @@
 
 {% block extra_js %}<script src="{% static "js/geolocation.js" %}"></script>{% endblock %}
 {% block body %}
-<div data-role="page" data-theme="a">
+<div data-role="page" class="home_page" data-theme="a">
 
   <div data-role="header">
     <p class="user_info ui-title">
-      <span class="nb_of_points">23</span><span class="star">&#x2605;</span>
+      <span class="nb_of_points">23</span><span class="trophy"><img src="{% static "stylesheets/themes/images/icons-png/trophy-2.png" %}"></span>
       <span class="user_name">Patricia</span>
     </p>
   </div>
 
   <div role="main" class="ui-content">
     <form method="post">{% csrf_token %}
-      <fieldset data-role="controlgroup" data-type="horizontal">
-        {{form.non_field_errors}}
-        <legend>Which dumpsters are full?</legend>
-        <label for="id_is_brown">Brown</label>
-        {{form.is_brown}}
-        <label for="id_is_yellow">Yellow</label>
-        {{form.is_yellow}}
-        <label for="id_is_blue">Blue</label>
-        {{form.is_blue}}
-        <label for="id_is_gray">Gray</label>
-        {{form.is_gray}}
+      <fieldset data-type="horizontal">
+        <h3 class="headline">Which dumpsters are full?</h3>
+        <div class="ui-grid-b">
+          <div class="dumpster_type ui-block-a" >
+            <label for="id_is_brown"><img src="{% static "stylesheets/themes/images/icons-png/plant-2.png" %}"></label>
+            {{form.is_brown|add_attrs:"data-theme:c"}}
+          </div>
+          <div class="dumpster_type ui-block-b" >
+            <label for="id_is_yellow"><img src="{% static "stylesheets/themes/images/icons-png/coffee-2.png" %}"></label>
+            {{form.is_yellow|add_attrs:"data-theme:d"}}
+          </div>
+          <div class="dumpster_type ui-block-a" >
+            <label for="id_is_blue"><img src="{% static "stylesheets/themes/images/icons-png/stickynote-2.png" %}"></label>
+            {{form.is_blue|add_attrs:"data-theme:b"}}
+          </div>
+          <div class="dumpster_type ui-block-b" >
+            <label for="id_is_gray"><img src="{% static "stylesheets/themes/images/icons-png/skull-2.png" %}"></label>
+            {{form.is_gray|add_attrs:"data-theme:e"}}
+          </div>
+        </div>
       </fieldset>
       <fieldset>
+        <h3 class="headline">Where are the dumpsters?</h3>
+        {{form.non_field_errors}}
         {{form.street_address|add_attrs:"placeholder:Street and number"}}
         <div class="ui-grid-b">
           <div class="ui-block-a">{{form.zip_code|add_attrs:"placeholder:ZIP code"}}</div>
           <div class="ui-block-b">{{form.city|add_attrs:"placeholder:City"}}</div>
-          <div class="ui-block-c ui-nodisc-icon ui-alt-icon">
-            <input class="geolocate" data-icon="location" data-iconpos="notext" value="Find current position" type="button">
+          <div class="geolocation ui-block-c ui-nodisc-icon ui-alt-icon">
+            <input class="geolocate" data-icon="location" data-theme="f" data-iconpos="notext" value="Find current position" type="button">
           </div>
         </div>
       </fieldset>
-      <p class="ui-nodisc-icon ui-alt-icon"><input data-icon="check" type="submit" value="Send"></p>
+      <p class="ui-nodisc-icon"><input data-icon="check" type="submit" value="Send"></p>
     </form>
   </div>
 </div>
