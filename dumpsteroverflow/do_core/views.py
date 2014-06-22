@@ -55,7 +55,7 @@ def home(request):
 
             return HttpResponseRedirect(reverse('overflow', args=(points,)))
     else:
-        address = request.user.discoverer.default_address:
+        address = request.user.discoverer.default_address
         if address:
             form.city = address.city
             form.zip_code = address.zip_code
