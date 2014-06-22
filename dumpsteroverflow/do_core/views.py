@@ -46,10 +46,11 @@ def home(request):
             for field, dumpster_type in Dumpster.DUMPSTER_FIELDS.items():
                 if form.cleaned_data[field]:
                     dumpster, created = Dumpster.objects.get_or_create(dumpster_type=dumpster_type, location=address)
-                    dumpster.is_full = True
                     dumpster.dumpster_type = dumpster_type
+                    if not dumpster.is_full:
+                        dumpster.is_full = True
+                        points += 3
                     dumpster.save()
-                    points += 3
 
             return HttpResponseRedirect(reverse('overflow', args=(points,)))
     else:
@@ -67,6 +68,6 @@ def overflow(request, points):
     if points=='0':
         return render(request, 'overflow_sent.html', {'flash_error': 'This dumpster overflow was already reported.'})
     else:
-        request.user.discoverer.points += points
+        request.user.discoverer.points += int(points)
         request.user.discoverer.save()
         return render(request, 'overflow_sent.html', {'points': points})
