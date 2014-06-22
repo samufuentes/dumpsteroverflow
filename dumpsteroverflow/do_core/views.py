@@ -22,7 +22,6 @@ def login(request):
         "openid_redirect_uri": os.environ['PAYPAL_OPENID_REDIRECT_URI']})
     if token:
         user = authenticate(token=token)
-        print "Hola, ", user
         if user is not None:
             auth_login(request, user)
             redirect_url = '/'
@@ -59,7 +58,6 @@ def home(request):
             formdict = {'city': address.city,
                         'zip_code': address.zip_code,
                         'street_address': address.street_address}
-            print formdict
             form = OverflowForm(initial=formdict)
 
     context = {'form': form}
