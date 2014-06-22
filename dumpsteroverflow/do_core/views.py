@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from forms import OverflowForm
 from models import Address, Dumpster
 from django.views.generic.base import View
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 import paypalrestsdk as pp
 import os
@@ -24,7 +24,7 @@ def login(request):
         user = authenticate(token=token)
         print "Hola, ", user
         if user is not None:
-            login(request, user)
+            auth_login(request, user)
             redirect_url = '/'
     else:
         redirect_url = pp.Tokeninfo.authorize_url({
