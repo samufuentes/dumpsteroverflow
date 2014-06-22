@@ -49,6 +49,7 @@ def home(request):
                 if form.cleaned_data[field]:
                     dumpster, created = Dumpster.objects.get_or_create(dumpster_type=dumpster_type, location=address)
                     dumpster.is_full = True
+                    dumpster.dumpster_type = dumpster_type
                     dumpster.save()
                     points += 3
 
