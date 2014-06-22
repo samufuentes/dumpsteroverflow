@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load enhance_markup %}
+{% load staticfiles %}
 
+{% block extra_js %}<script src="{% static "js/geolocation.js" %}"></script>{% endblock %}
 {% block body %}
 <div data-role="page" data-theme="a">
 
@@ -24,9 +26,12 @@
       </fieldset>
       <fieldset>
         {{form.street_address|add_attrs:"placeholder:Street and number"}}
-        <div class="ui-grid-a">
+        <div class="ui-grid-b">
           <div class="ui-block-a">{{form.zip_code|add_attrs:"placeholder:ZIP code"}}</div>
-          <div class="ui-block-b">{{form.city|add_attrs:"placeholder:City"}}
+          <div class="ui-block-b">{{form.city|add_attrs:"placeholder:City"}}</div>
+          <div class="ui-block-c ui-nodisc-icon ui-alt-icon">
+            <input class="geolocate" data-icon="location" data-iconpos="notext" value="Find current position" type="button">
+          </div>
         </div>
       </fieldset>
       <p><input type="submit" value="Send"></p>
