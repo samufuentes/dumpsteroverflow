@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class GenericFieldsMixin(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -9,9 +10,6 @@ class GenericFieldsMixin(models.Model):
     class Meta:
         abstract = True
 
-class Discoverer(GenericFieldsMixin):
-    user = models.OneToOneField(User)
-    points = models.IntegerField(default=0)
 
 class Address(GenericFieldsMixin):
     street_address = models.CharField(max_length=200)
@@ -20,6 +18,13 @@ class Address(GenericFieldsMixin):
 
     class Meta:
         unique_together = ('street_address', 'zip_code', 'city')
+
+
+class Discoverer(GenericFieldsMixin):
+    user = models.OneToOneField(User)
+    points = models.IntegerField(default=0)
+    default_address = models.OneToOneField(Address, null=True)
+
 
 class Dumpster(GenericFieldsMixin):
     DUMPSTER_TYPES = (
@@ -35,6 +40,7 @@ class Dumpster(GenericFieldsMixin):
 
     class Meta:
         unique_together = ('dumpster_type', 'location')
+
 
 class Overflow(GenericFieldsMixin):
     user = models.ForeignKey(Discoverer)
