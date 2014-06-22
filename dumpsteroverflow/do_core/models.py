@@ -33,6 +33,12 @@ class Dumpster(GenericFieldsMixin):
             ('BLUE', 'PAPER'),
             ('GRAY', 'WASTE'),
         )
+    DUMPSTER_FIELDS = {
+        'is_brown': DUMPSTER_TYPES[0][0],
+        'is_yellow': DUMPSTER_TYPES[1][0],
+        'is_blue': DUMPSTER_TYPES[2][0],
+        'is_gray': DUMPSTER_TYPES[3][0]
+    }
 
     dumpster_type = models.CharField(max_length=10, choices=DUMPSTER_TYPES)
     location = models.ForeignKey(Address)
