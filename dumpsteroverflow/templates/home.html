@@ -14,7 +14,7 @@
   </div>
 
   <div role="main" class="ui-content">
-    <form method="post">{% csrf_token %}
+    <form method="post" data-ajax="false">{% csrf_token %}
       <fieldset data-role="controlgroup" data-type="horizontal">
         {{form.non_field_errors}}
         <legend>Which dumpsters are full?</legend>
