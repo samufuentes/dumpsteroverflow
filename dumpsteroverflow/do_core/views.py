@@ -33,14 +33,13 @@ def login(request):
     return redirect(redirect_url)
 
 
+@login_required(login_url='login/')
 def home(request):
     template_name = 'home.html'
     form = OverflowForm()
     context = {'form': form}
 
     if request.method == 'POST':
-        if not request.user.is_authenticated():
-            return redirect('login/', status='/')
         form = OverflowForm(request.POST)
         if form.is_valid():
             # Reset form since we come back to initial view instead of redirect.
