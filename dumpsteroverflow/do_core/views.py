@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from forms import OverflowForm
-from models import Address, Dumpster
+from models import Address, Dumpster, Overflow
 from django.views.generic.base import View
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
@@ -52,6 +52,7 @@ def home(request):
                     if not dumpster.is_full:
                         dumpster.is_full = True
                         points += 3
+                        Overflow.objects.create(user=request.user.discoverer, dumpster=dumpster)
                     dumpster.save()
             request.user.discoverer.points += points
             request.user.discoverer.save()
