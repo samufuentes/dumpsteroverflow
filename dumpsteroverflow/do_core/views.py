@@ -76,5 +76,5 @@ def overflow(request, points):
             #         dumpster.save()
             #         # TODO: Update points
             #         # TODO: Send alert to garbage collectors
-            form = OverflowForm()
+        form = OverflowForm()
     return render(request, template_name, context)
