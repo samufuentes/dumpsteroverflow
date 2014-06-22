@@ -15,7 +15,6 @@ import os
 
 def login(request):
     token = request.GET.get('code')
-    status = request.GET.get('next') or request.GET.get('status')
     pp.configure({
         "mode": os.environ['PAYPAL_MODE'],
         "client_id": os.environ['PAYPAL_CLIENT_ID'],
@@ -25,15 +24,15 @@ def login(request):
         user = authenticate(token=token)
         if user is not None:
             login(request, user)
-        redirect_url = status
+        redirect_url = '/'
     else:
         redirect_url = pp.Tokeninfo.authorize_url({
             "scope": "profile email address phone https://uri.paypal.com/services/paypalattributes",
-            "state": str(status)})
+            })
     return redirect(redirect_url)
 
 
-@login_required(login_url='login/')
+@login_required(login_url='login/', redirect_field_name='status')
 def home(request):
     template_name = 'home.html'
     form = OverflowForm()
