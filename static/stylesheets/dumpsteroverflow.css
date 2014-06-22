@@ -42,3 +42,12 @@
 .home_page {
   background-image: url("/static/images/bkg-5.jpg");
 }
+
+.home_page .ui-btn {
+  border-color: #444 !important;
+}
+
+.home_page .ui-input-text {
+  border-color: #888 !important;
+  border-radius: 3px !important;
+}
