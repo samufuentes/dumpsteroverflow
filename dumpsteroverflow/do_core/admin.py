@@ -12,7 +12,7 @@ class DiscovererAdmin(admin.ModelAdmin):
     list_display = ('user', 'default_address', 'points')
 
 class OverflowAdmin(admin.ModelAdmin):
-    list_display = ('user', 'dumpster')
+    list_display = ('user', 'dumpster', 'modified_at')
 
 admin.site.register(Discoverer, DiscovererAdmin)
 admin.site.register(Dumpster, DumpsterAdmin)
