@@ -22,7 +22,6 @@ def login(request):
         "openid_redirect_uri": os.environ['PAYPAL_OPENID_REDIRECT_URI']})
     if token:
         user = authenticate(token=token)
-        print "Hola, ", user
         if user is not None:
             auth_login(request, user)
             redirect_url = '/'
@@ -37,7 +36,6 @@ def login(request):
 def home(request):
     template_name = 'home.html'
     form = OverflowForm()
-    context = {'form': form}
 
     if request.method == 'POST':
         form = OverflowForm(request.POST)
@@ -54,6 +52,15 @@ def home(request):
                     points += 3
 
             return HttpResponseRedirect(reverse('overflow', args=(points,)))
+    else:
+        address = request.user.discoverer.default_address
+        if address:
+            formdict = {'city': address.city,
+                        'zip_code': address.zip_code,
+                        'street_address': address.street_address}
+            form = OverflowForm(initial=formdict)
+
+    context = {'form': form}
     return render(request, template_name, context)
 
 def overflow(request, points):
