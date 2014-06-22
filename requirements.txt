@@ -1,4 +1,5 @@
 Django==1.6.5
+geopy==0.99
 gunicorn==19.0.0
 paypalrestsdk==1.1.0
 psycopg2==2.5.3
