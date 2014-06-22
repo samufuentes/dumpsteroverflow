@@ -2,7 +2,7 @@
 
 {% block body %}
   {% if flash_error %}
-    <div data-role="page" data-theme="a" data-dialog="true" data-close-btn="none">
+    <div data-role="page" data-theme="a" data-dialog="true" data-close-btn="none" data-url="/overflow/0">
       <div data-role="header">
         <h1>Ouch!</h1>
       </div>
@@ -13,7 +13,7 @@
       </div>
     </div>
   {% else %}
-    <div data-role="page" data-theme="a" data-dialog="true" data-close-btn="none">
+    <div data-role="page" data-theme="a" data-dialog="true" data-close-btn="none" data-url="/overflow/{{points}}">
       <div data-role="header">
         <h1>Thank you!</h1>
       </div>
