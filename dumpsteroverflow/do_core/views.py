@@ -9,6 +9,8 @@ from models import Address, Dumpster
 from django.views.generic.base import View
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
+from geopy.geocoders import GoogleV3
+import json
 import paypalrestsdk as pp
 import os
 
@@ -70,3 +72,11 @@ def overflow(request, points):
         return render(request, 'overflow_sent.html', {'flash_error': 'This dumpster overflow was already reported.'})
     else:
         return render(request, 'overflow_sent.html', {'points': points})
+
+def geo(request):
+    lat = request.POST['lat']
+    lng = request.POST['lng']
+    geolocator = GoogleV3()
+    location = geolocator.reverse("{}, {}".format(lat, lng))
+    json_data = json.dumps(location.raw)
+    return HttpResponse(json_data, mimetype="application/json")
