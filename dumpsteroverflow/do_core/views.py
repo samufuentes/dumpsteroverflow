@@ -57,10 +57,10 @@ def home(request):
     else:
         address = request.user.discoverer.default_address
         if address:
-            form.city = address.city
-            form.zip_code = address.zip_code
-            form.street_address = address.street_address
-            context = {'form': form}
+            formdict = {'city': address.city,
+                        'zip_code': address.zip_code,
+                        'street_address': address.street_address}
+            form = OverflowForm(formdict)
 
     return render(request, template_name, context)
 
