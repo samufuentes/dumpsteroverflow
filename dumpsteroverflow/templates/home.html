@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 {% load enhance_markup %}
+{% load staticfiles %}
 
+{% block extra_js %}<script src="{% static "js/geolocation.js" %}"></script>{% endblock %}
 {% block body %}
 <div data-role="page" data-theme="a">
 
   <div data-role="header">
-    <h1>Page Title</h1>
+    <p class="user_info ui-title">
+      <span class="nb_of_points">23</span><span class="star">&#x2605;</span>
+      <span class="user_name">Patricia</span>
+    </p>
   </div>
 
   <div role="main" class="ui-content">
@@ -24,12 +29,15 @@
       </fieldset>
       <fieldset>
         {{form.street_address|add_attrs:"placeholder:Street and number"}}
-        <div class="ui-grid-a">
+        <div class="ui-grid-b">
           <div class="ui-block-a">{{form.zip_code|add_attrs:"placeholder:ZIP code"}}</div>
-          <div class="ui-block-b">{{form.city|add_attrs:"placeholder:City"}}
+          <div class="ui-block-b">{{form.city|add_attrs:"placeholder:City"}}</div>
+          <div class="ui-block-c ui-nodisc-icon ui-alt-icon">
+            <input class="geolocate" data-icon="location" data-iconpos="notext" value="Find current position" type="button">
+          </div>
         </div>
       </fieldset>
-      <p><input type="submit" value="Send"></p>
+      <p class="ui-nodisc-icon ui-alt-icon"><input data-icon="check" type="submit" value="Send"></p>
     </form>
   </div>
 </div>
