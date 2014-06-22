@@ -3,8 +3,7 @@ from django.contrib import admin
 from models import Discoverer, Dumpster, Address, Overflow
 
 class DumpsterAdmin(admin.ModelAdmin):
-    list_display = ('dumpster_type', 'is_full', 'modified_at')
-    list_filter = ['modified_at']
+    list_display = ('dumpster_type', 'is_full', 'modified_at', 'location')
 
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('street_address', 'zip_code', 'city', 'modified_at')

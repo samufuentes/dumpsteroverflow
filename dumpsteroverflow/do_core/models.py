@@ -19,6 +19,9 @@ class Address(GenericFieldsMixin):
     class Meta:
         unique_together = ('street_address', 'zip_code', 'city')
 
+    def __unicode__(self):
+        return u'%s %d %s' %(self.street_address, self.zip_code, self.city)
+
 
 class Discoverer(GenericFieldsMixin):
     user = models.OneToOneField(User)
