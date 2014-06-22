@@ -15,7 +15,7 @@ import os
 
 def login(request):
     token = request.GET.get('code')
-    next = request.GET.get('next')
+    status = request.GET.get('status')
     pp.configure({
         "mode": os.environ['PAYPAL_MODE'],
         "client_id": os.environ['PAYPAL_CLIENT_ID'],
@@ -25,23 +25,25 @@ def login(request):
         user = authenticate(token=token)
         if user is not None:
             login(request, user)
-        redirect_url = next
+        redirect_url = status
     else:
         redirect_url = pp.Tokeninfo.authorize_url({
             "scope": "profile email address phone https://uri.paypal.com/services/paypalattributes",
-            "state": str(next)})
+            "state": str(status)})
     return redirect(redirect_url)
 
 
-@login_required(login_url='/login/')
 def home(request):
     template_name = 'home.html'
     form = OverflowForm()
     context = {'form': form}
 
     if request.method == 'POST':
+        if not request.user.is_authenticated():
+            return redirect('login/', status='/')
         form = OverflowForm(request.POST)
         if form.is_valid():
+            # Reset form since we come back to initial view instead of redirect.
             # TODO. Update context: points and point variation
             points = 0
             address, created = Address.objects.get_or_create(street_address=form.cleaned_data['street_address'],
@@ -75,5 +77,4 @@ def overflow(request, points):
             #         # TODO: Update points
             #         # TODO: Send alert to garbage collectors
             form = OverflowForm()
-    print form
     return render(request, template_name, context)
