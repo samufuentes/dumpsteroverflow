@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from models import Discoverer, Dumpster, Address, Overflow
+
+admin.site.register(Discoverer)
+admin.site.register(Dumpster)
+admin.site.register(Address)
+admin.site.register(Overflow)
