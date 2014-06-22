@@ -51,7 +51,8 @@ def home(request):
                         dumpster.is_full = True
                         points += 3
                     dumpster.save()
-
+            request.user.discoverer.points += points
+            request.user.discoverer.save()
             return HttpResponseRedirect(reverse('overflow', args=(points,)))
     else:
         address = request.user.discoverer.default_address
@@ -68,6 +69,4 @@ def overflow(request, points):
     if points=='0':
         return render(request, 'overflow_sent.html', {'flash_error': 'This dumpster overflow was already reported.'})
     else:
-        request.user.discoverer.points += int(points)
-        request.user.discoverer.save()
         return render(request, 'overflow_sent.html', {'points': points})
