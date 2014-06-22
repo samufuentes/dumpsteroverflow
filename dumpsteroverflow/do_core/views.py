@@ -37,7 +37,6 @@ def login(request):
 def home(request):
     template_name = 'home.html'
     form = OverflowForm()
-    context = {'form': form}
 
     if request.method == 'POST':
         form = OverflowForm(request.POST)
@@ -60,8 +59,10 @@ def home(request):
             formdict = {'city': address.city,
                         'zip_code': address.zip_code,
                         'street_address': address.street_address}
-            form = OverflowForm(formdict)
+            print formdict
+            form = OverflowForm(initial=formdict)
 
+    context = {'form': form}
     return render(request, template_name, context)
 
 def overflow(request, points):
