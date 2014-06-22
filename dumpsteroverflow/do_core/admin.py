@@ -8,7 +8,13 @@ class DumpsterAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('street_address', 'zip_code', 'city', 'modified_at')
 
-admin.site.register(Discoverer)
+class DiscovererAdmin(admin.ModelAdmin):
+    list_display = ('user', 'default_address', 'points')
+
+class OverflowAdmin(admin.ModelAdmin):
+    list_display = ('user', 'dumpster')
+
+admin.site.register(Discoverer, DiscovererAdmin)
 admin.site.register(Dumpster, DumpsterAdmin)
 admin.site.register(Address, AddressAdmin)
-admin.site.register(Overflow)
+admin.site.register(Overflow, OverflowAdmin)

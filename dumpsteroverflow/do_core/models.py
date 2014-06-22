@@ -28,6 +28,9 @@ class Discoverer(GenericFieldsMixin):
     points = models.IntegerField(default=0)
     default_address = models.OneToOneField(Address, null=True)
 
+    def __unicode__(self):
+        return u'%s' %self.user.__unicode__()
+
 
 class Dumpster(GenericFieldsMixin):
     DUMPSTER_TYPES = (
@@ -49,6 +52,9 @@ class Dumpster(GenericFieldsMixin):
 
     class Meta:
         unique_together = ('dumpster_type', 'location')
+
+    def __unicode__(self):
+        return u'%s %s' %(self.dumpster_type, self.location.__unicode__())
 
 
 class Overflow(GenericFieldsMixin):
