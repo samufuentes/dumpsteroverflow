@@ -27,3 +27,4 @@ class PaypalBackend(ModelBackend):
                 zip_code=address['postal_code'],
                 city=address['locality'])
             discoverer.save()
+        return user
