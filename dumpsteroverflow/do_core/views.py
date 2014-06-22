@@ -60,6 +60,7 @@ def home(request):
             form.city = address.city
             form.zip_code = address.zip_code
             form.street_address = address.street_address
+            context = {'form': form}
 
     return render(request, template_name, context)
 
