@@ -15,7 +15,7 @@ import os
 
 def login(request):
     token = request.GET.get('code')
-    status = request.GET.get('status')
+    status = request.GET.get('next') or request.GET.get('status')
     pp.configure({
         "mode": os.environ['PAYPAL_MODE'],
         "client_id": os.environ['PAYPAL_CLIENT_ID'],
